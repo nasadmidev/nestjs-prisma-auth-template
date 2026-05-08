@@ -45,17 +45,6 @@ describe('AuthController', () => {
     });
   });
 
-  describe('google routes', () => {
-    it('googleLogin should return undefined', async () => {
-      const mockReq = {
-        user: { id: 'user-id', username: 'test' },
-      } as Partial<Request>;
-      const result = await controller.googleLoginCallback(mockReq as Request);
-      expect(result).toBeUndefined();
-      expect(mockAuthService.login).toHaveBeenCalledWith(mockReq.user);
-    });
-  });
-
   describe('regenerate', () => {
     it('return a regenerated token', async () => {
       mockAuthService.regenerateToken.mockResolvedValue('new-token');

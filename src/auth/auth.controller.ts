@@ -30,22 +30,6 @@ export class AuthController {
   }
 
   @Public()
-  @UseGuards(AuthGuard('google'))
-  @Get('google')
-  @ApiOperation({ summary: 'Login with Google OAuth' })
-  @ApiResponse({ status: 200, description: 'Redirects to Google OAuth' })
-  async googleLogin() {}
-
-  @Public()
-  @UseGuards(AuthGuard('google'))
-  @Get('google/callback')
-  @ApiOperation({ summary: 'Google OAuth callback' })
-  @ApiResponse({ status: 200, description: 'Login successful, returns JWT token' })
-  async googleLoginCallback(@Req() req: Request & { user?: User }) {
-    return await this.authService.login(req.user as User);
-  }
-
-  @Public()
   @Put('regenerate')
   @ApiOperation({ summary: 'Regenerate access token using refresh token' })
   @ApiResponse({ status: 200, description: 'New JWT token pair' })

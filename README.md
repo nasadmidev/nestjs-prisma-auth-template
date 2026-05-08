@@ -88,8 +88,6 @@ http://localhost:3000/api
 | Method | Endpoint | Description | Public |
 |--------|----------|-------------|--------|
 | POST | `/auth/login` | Login with credentials | Yes |
-| GET | `/auth/google` | Google OAuth login | Yes |
-| GET | `/auth/google/callback` | Google OAuth callback | Yes |
 | PUT | `/auth/regenerate` | Refresh JWT token | Yes |
 
 #### User (`/user`)
