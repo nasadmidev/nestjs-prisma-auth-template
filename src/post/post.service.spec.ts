@@ -44,12 +44,6 @@ describe('PostService', () => {
     updatedAt: new Date(),
   };
 
-  const author = {
-    id: authorId,
-    username: 'johndoe',
-    email: 'john@example.com',
-  };
-
   it('should find all published posts', async () => {
     prismaMock.post.findMany.mockResolvedValue([post]);
 
