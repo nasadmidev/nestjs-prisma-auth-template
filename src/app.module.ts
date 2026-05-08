@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 import { HealthModule } from './health/health.module';
+import { JwtGuard } from './auth/jwt/jwt.guard';
+import { RolesGuard } from './auth/roles/role.guard';
 
 @Module({
   imports: [
@@ -23,6 +25,16 @@ import { HealthModule } from './health/health.module';
     UserModule,
     PostModule,
     HealthModule,
+  ],
+  providers: [
+    {
+      provide: 'APP_GUARD',
+      useClass: JwtGuard,
+    },
+    {
+      provide: 'APP_GUARD',
+      useClass: RolesGuard,
+    },
   ],
 })
 export class AppModule {}

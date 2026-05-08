@@ -9,14 +9,18 @@ export class PostService {
 
   async findAll() {
     return await this.prisma.post.findMany({
-      include: { author: { select: { id: true, username: true, email: true } } },
+      include: {
+        author: { select: { id: true, username: true, email: true } },
+      },
     });
   }
 
   async findAllPublished() {
     return await this.prisma.post.findMany({
       where: { published: true },
-      include: { author: { select: { id: true, username: true, email: true } } },
+      include: {
+        author: { select: { id: true, username: true, email: true } },
+      },
     });
   }
 
@@ -24,7 +28,19 @@ export class PostService {
     validateUUID(id);
     return await this.prisma.post.findUnique({
       where: { id },
-      include: { author: { select: { id: true, username: true, email: true } } },
+      include: {
+        author: { select: { id: true, username: true, email: true } },
+      },
+    });
+  }
+
+  async findOnePublished(id: string) {
+    validateUUID(id);
+    return await this.prisma.post.findUnique({
+      where: { id, published: true },
+      include: {
+        author: { select: { id: true, username: true, email: true } },
+      },
     });
   }
 
@@ -32,7 +48,9 @@ export class PostService {
     validateUUID(authorId);
     return await this.prisma.post.findMany({
       where: { authorId },
-      include: { author: { select: { id: true, username: true, email: true } } },
+      include: {
+        author: { select: { id: true, username: true, email: true } },
+      },
     });
   }
 

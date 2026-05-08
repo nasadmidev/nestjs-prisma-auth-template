@@ -57,7 +57,9 @@ describe('PostService', () => {
     expect(result).toEqual([post]);
     expect(prismaMock.post.findMany).toHaveBeenCalledWith({
       where: { published: true },
-      include: { author: { select: { id: true, username: true, email: true } } },
+      include: {
+        author: { select: { id: true, username: true, email: true } },
+      },
     });
   });
 
@@ -76,7 +78,9 @@ describe('PostService', () => {
     expect(result).toEqual(post);
     expect(prismaMock.post.findUnique).toHaveBeenCalledWith({
       where: { id },
-      include: { author: { select: { id: true, username: true, email: true } } },
+      include: {
+        author: { select: { id: true, username: true, email: true } },
+      },
     });
   });
 
@@ -87,7 +91,9 @@ describe('PostService', () => {
     expect(result).toEqual([post]);
     expect(prismaMock.post.findMany).toHaveBeenCalledWith({
       where: { authorId },
-      include: { author: { select: { id: true, username: true, email: true } } },
+      include: {
+        author: { select: { id: true, username: true, email: true } },
+      },
     });
   });
 

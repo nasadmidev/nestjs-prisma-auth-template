@@ -5,12 +5,10 @@ import {
   Param,
   Post,
   Req,
-  UseGuards,
   Put,
   Delete,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { JwtGuard } from '@/auth/jwt/jwt.guard';
 import type { RequestAuthorized } from '@/auth/auth.service';
 import { CreateUserDTO, UpdateUserDTO } from './user.dto';
 import { Roles } from '@/auth/roles/role.decorator';
@@ -30,7 +28,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('all')
-  @UseGuards(JwtGuard)
   @Roles(Role['ADMIN'])
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Get all users (admin only)' })
@@ -42,7 +39,6 @@ export class UserController {
   }
 
   @Get()
-  @UseGuards(JwtGuard)
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Get current authenticated user' })
   @ApiResponse({ status: 200, description: 'Current user data' })
@@ -53,7 +49,6 @@ export class UserController {
   }
 
   @Get(':id')
-  @UseGuards(JwtGuard)
   @Roles(Role['ADMIN'])
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Get user by ID (admin only)' })
@@ -67,7 +62,6 @@ export class UserController {
   }
 
   @Post()
-  @UseGuards(JwtGuard)
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Create a new user' })
   @ApiResponse({ status: 201, description: 'User created successfully' })
@@ -77,7 +71,6 @@ export class UserController {
   }
 
   @Put()
-  @UseGuards(JwtGuard)
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Update current authenticated user' })
   @ApiResponse({ status: 200, description: 'User updated successfully' })
@@ -88,7 +81,6 @@ export class UserController {
   }
 
   @Put(':id')
-  @UseGuards(JwtGuard)
   @Roles(Role['ADMIN'])
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Update user by ID (admin only)' })
@@ -105,7 +97,6 @@ export class UserController {
   }
 
   @Delete()
-  @UseGuards(JwtGuard)
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Delete current authenticated user' })
   @ApiResponse({ status: 200, description: 'User deleted successfully' })
@@ -116,7 +107,6 @@ export class UserController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtGuard)
   @Roles(Role['ADMIN'])
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Delete user by ID (admin only)' })
